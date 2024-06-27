@@ -14,7 +14,7 @@ Create a folder in your local directory and name it "Smart-Shop Products API". U
 4. Nodemon - Use this command `npm install nodemon`
 
 ### Step 3. Create an ```index.js``` file
-The `index.js` file will serve as the openning file for our server.
+The `index.js` file will serve as the entry point to our application.
 
 ### Step 4: INITIALIZE Prisma ORM
 Use `npx prisma init`. This sets up our prisma project.
@@ -75,7 +75,7 @@ It shall perform the migration and then a new folder will be created that shall 
 Use this command:
 `npm prisma generate`
 
-### Implementing the Endpoint
+### Step 7: IMPLEMENTING THE ENDPOINTS
 Implement endpoints to perform the following operations:
 - Get All Products: retrieve a list of all products from the database.
 
@@ -86,3 +86,5 @@ Implement endpoints to perform the following operations:
 - Update a Products; update a product based on it's id.
 
 - Delete a Product - delete a product based on it's id.
+
+#### Creating a single product
