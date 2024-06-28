@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {config} from 'dotenv'
+import { vaildateProducts } from "../middleware/products.middleware";
 import { displayaProduct, displayallProducts, createProduct, updateProducts, deleteProducts } from "../controllers/products.controllers";
 import { PrismaClient } from "@prisma/client"
 
@@ -17,7 +18,7 @@ router.get("/:id", displayaProduct)
 router.post("/", createProduct)
 
 
-router.patch("/:id", updateProducts)
+router.patch("/:id", updateProducts, vaildateProducts)
 
 
 router.delete("/:id", deleteProducts)
