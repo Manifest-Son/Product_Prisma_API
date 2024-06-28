@@ -1,0 +1,14 @@
+const createProducts = async () => {
+    const product = await prisma.pRODUCTS.create({
+        data :
+            {
+                productThumbnail: 'https://google.com/picture856776',
+                productTitle: 'Passion',
+                productDescription: 'This is a fruit pudding',
+                productCost: 30,
+                onOffer: false
+              }
+    })
+    console.log(product)
+}
+createProducts()

@@ -14,7 +14,7 @@ datasource db {
 }
 
 model PRODUCTS {
-  id Int @id @default(autoincrement())
+  id String @id @default(uuid())
   productThumbnail String @map("product_Thumbnail")
   productTitle String @map("product_Title")
   productDescription String @map("product_Description")
