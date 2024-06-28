@@ -1,6 +1,8 @@
 
 import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
+
 export  const displayallProducts = async (req, res) => {
     try{
         const allProducts = await prisma.pRODUCTS.findMany();
@@ -25,13 +27,13 @@ export const displayaProduct = async (req, res) => {
             }
         })
         if(!findProduct){
-            res.status(404).json({message: "product not found"})
+            res.status(404).json({success: true, message: "product not found"})
         } else {
-            res.status(500).json({success: false, message: "An error occured. Try again later."})
+            res.status(500).json({success: false, message: e.message})
         }
         res.status(201).json(findProduct)
     } catch (e){
-        res.status(500).json({success: false, message: "Error has occured. Please try again"})
+        res.status(500).json({success: false, message: e.message})
     }
 }
 
