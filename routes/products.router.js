@@ -6,12 +6,38 @@ config()
 const router = Router();
 const prisma = new PrismaClient();
 
-router.get("/", (req, res) => {
-    res.send("Display all products")
+router.get("/", async (req, res) => {
+    try{
+        const allProducts = await prisma.pRODUCTS.findMany();
+        res.status(201).json(allProducts)
+    } catch (e){
+        res.status(500).json({success: false, message: "An error occured. Please try again."})
+    }
 })
 
-router.get("/:id", (req, res) => {
-    res.send("Display a products")
+router.get("/:id", async (req, res) => {
+    const id = req.params.id;
+    try{
+        const findProduct = await prisma.pRODUCTS.findFirst({
+            where: {
+                id: id
+            },
+            select: {
+                productThumbnail: true,
+                productTitle: true,
+                productDescription: true,
+                productCost: true
+            }
+        })
+        if(!findProduct){
+            res.status(404).json({message: "product not found"})
+        } else {
+            res.status(500).json({success: false, message: "An error occured. Try again later."})
+        }
+        res.status(201).json(findProduct)
+    } catch (e){
+        res.status(500).json({success: false, message: "Error has occured. Please try again"})
+    }
 })
 
 router.post("/", async (req, res) => {
