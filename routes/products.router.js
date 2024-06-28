@@ -68,12 +68,25 @@ router.patch("/:id", (req, res) => {
     res.send("Modify products")
 })
 
-router.delete("/:id", (req, res) => {
-    res.send("Delete products")
+router.delete("/:id", async (req, res) => {
+    const id = req.params.id
+    try{
+        const deleteProduct = await prisma.pRODUCTS.delete({
+            where: {
+                id: id
+            }
+        })
+        if (!deleteProduct){
+            res.status(404).json("We are sorry, we cannot fin the record")
+        } else {
+            res.status(500).json({message: "An error occured. Try again."})
+        }
+        res.status(201).json(deleteProduct)
+    } catch (e){
+        res.status(500).json({message: "An error occured. Try again."})
+    }
+    
 })
 
-router.get("/:id", (req, res) => {
-    res.send("Display all products")
-})
 
 export default router;
